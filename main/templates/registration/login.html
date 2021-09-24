@@ -1,0 +1,15 @@
+{% extends 'main/base.html' %}
+{% block title %}Войти{% endblock %}
+{% block content %}
+    {% load crispy_forms_tags %}
+    <div class="container">
+        <h2>Добро пожаловать снова!</h2>
+        <form method="post">
+          {% csrf_token %}
+          {{ form|crispy }}
+            <br>
+          <button type="submit" class="btn btn-primary">Войти</button><br>
+        </form>
+        <span>Не зарегистрованы? <a href="{% url 'register' %}">Зарегестрироваться</a></span>
+    </div>
+{% endblock content %}

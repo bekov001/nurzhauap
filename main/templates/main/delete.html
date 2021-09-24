@@ -1,0 +1,14 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Удаление вопроса{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>Удалить вопрос?</h1><br>
+        <form method="post">
+            {% csrf_token %}
+
+            <button class="btn btn-danger">Удалить вопрос?</button>
+        </form>
+    </div>
+{% endblock %}
