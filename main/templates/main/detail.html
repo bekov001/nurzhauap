@@ -18,16 +18,22 @@
         </div>
         <p>Комментарии {{ task.comments_task.all.count }}</p>
         <hr>
-        <p>Добавить комментарий</p>
-        <form action="" id="add_form" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form.text }}<br>
-            {{ form.img}}<br>
+        {% if user.is_authenticated %}
+            <p>Добавить комментарий</p>
+            <form action="" id="add_form" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.text }}<br>
+                {{ form.img}}<br>
 
-        </form>
-        <div class="modal-footer">
-            <button form="add_form" type="submit" class="btn btn-primary">Добавить</button>
-        </div>
+            </form>
+            <div class="modal-footer">
+                <button form="add_form" type="submit" class="btn btn-primary">Добавить</button>
+            </div>
+        {% else %}
+            <div class="alert alert-danger">
+                <a href="{% url 'register' %}">Зарегиструйтесь чтобы оставлять комментарии</a>
+            </div>
+        {% endif %}
             {% for item in task.comments_task.all %}
                 <div class="alert alert-warning">
                     Автор: {{ item.author }}<br><br>
