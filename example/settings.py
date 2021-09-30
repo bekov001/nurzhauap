@@ -123,10 +123,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 # STATIC_URL = '/staticfiles/'
 # The absolute path to the directory where collectstatic will collect staticfiles files for deployment.
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # The URL to use when referring to staticfiles files (where they will be served from)
-STATIC_URL = '/staticfiles/'
+STATIC_URL = '/static/'
 
 # MEDIA_ROOT = os.path.join(BASE_DIR, '/main/img/')
 # Default primary key field type
