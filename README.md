@@ -1,2 +1,0 @@
-# nurzhauap
-nurzhauap repository
