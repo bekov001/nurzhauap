@@ -7,6 +7,10 @@ from .models import Task
 
 
 # Create your views here.
+def test(request):
+    return render(request, "404/index.html")
+
+
 def index(request):
     tasks = Task.objects.order_by('-id')
     data = {

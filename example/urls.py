@@ -23,4 +23,5 @@ urlpatterns = [
     path("", include("main.urls"))
 ]
 
-# handler404 = "example.views.page_not_found_view"
+handler404 = "example.views.page_not_found_view"
+handler500 = "example.views.server_error"
