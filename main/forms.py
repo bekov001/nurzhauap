@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 from django.forms import ModelForm, TextInput, Textarea, FileInput, \
-    PasswordInput, CharField
+    PasswordInput, CharField, Select
 from .models import Task, Comments
 
 
@@ -9,7 +9,7 @@ class TaskForm(ModelForm):
 
     class Meta:
         model = Task
-        fields = ['title', 'task', "img"]
+        fields = ['title', 'task', "img", "theme"]
 
         widgets = {"title": TextInput(attrs={
             'class': 'form-control',
@@ -19,6 +19,9 @@ class TaskForm(ModelForm):
             'class': 'form-control',
             'placeholder': 'Введите описание',
 
+        }), "theme": Select(attrs={
+            "class": "form-select",
+            # "max-width": "200"
         })
         }
 
@@ -67,6 +70,6 @@ class CommentForm(ModelForm):
             "text": Textarea(attrs={
                 'class': 'form-control',
                 'placeholder': 'Введите описание',
-                "rows": 4
+                "rows": 4,
             })
         }

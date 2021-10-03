@@ -1,11 +1,21 @@
 from django.contrib.auth.models import User
 from django.db import models
 
+THEMES = (
+    ('programming', 'Программирование'),
+    ('math', 'Математика'),
+    ('rus', 'Русский язык'),
+    ('rus_lit', 'Русская литература'),
+    ('eng', 'Английский')
+)
+
 
 class Task(models.Model):
     title = models.CharField('Название', max_length=50)
     task = models.TextField("Описание", max_length=1500)
     img = models.ImageField(upload_to=r"media", null=True, blank=True)
+    theme = models.CharField(max_length=11, choices=THEMES,
+                             default='math')
 
     def __str__(self):
         return self.title

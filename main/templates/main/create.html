@@ -5,18 +5,25 @@
 {% block content %}
     <div class="container">
         <h1>Создать вопрос</h1><br>
-        <form method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form.title }}<br>
-            {{ form.task }}<br>
-{#            <span style="color: darkgoldenrod;">Поддерживается только png</span><br>#}
-            {{ form.img }}<br>
-            <br>
-
-{#            <input type="text" placeholder="Введите название" class="form-control"><br>#}
-{#            <textarea name="" id="" cols="30" rows="5" placeholder="Введите название" class="form-control"></textarea><br>#}
-            <button class="btn btn-success" type="submit">Добавить</button>
-            <span>{{ error }}</span>
-        </form>
+        {% if user.is_authenticated %}
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.title }}<br>
+                {{ form.task }}<br>
+    {#            <span style="color: darkgoldenrod;">Поддерживается только png</span><br>#}
+                <div class="row">
+                    <div class="col pb-3"> {{ form.img }} </div>
+                    <div class="col pb-3"> {{ form.theme }} </div>
+                </div>
+    {#            <input type="text" placeholder="Введите название" class="form-control"><br>#}
+    {#            <textarea name="" id="" cols="30" rows="5" placeholder="Введите название" class="form-control"></textarea><br>#}
+                <button class="btn btn-success" type="submit">Добавить</button>
+                <span>{{ error }}</span>
+            </form>
+        {% else %}
+            <div class="alert alert-danger">
+                <a href="{% url 'register' %}">Зарегестрируйтесь чтобы задавать вопросы</a>
+            </div>
+        {% endif %}
     </div>
 {% endblock %}
