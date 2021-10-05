@@ -1,11 +1,15 @@
 {% extends 'main/base.html' %}
 {#{% load crispy_forms_tags %}#}
 {% block title %}{{ task.title }}{% endblock %}
-
+{% load humanize %}
 {% block content %}
     <div class="container">
         <div class="alert alert-primary mt-3" style="word-wrap: break-word;">
-
+{#            <div style="width:30%;" class="bg-info rounded-circle">#}
+{#                <img src="{{ user.profile.get_avatar }}">#}
+{#            <img class="avatar avatar-32 bg-light rounded-circle text-white p-2"#}
+{#     src="{{ task.user.profile.get_avatar }}">#}
+{#            <a>{{ task.user }}</a>#}
             <h1>{{ task.title }}</h1>
 
             <p style="white-space: pre-line">{{ task.task }}</p>
@@ -14,8 +18,8 @@
             {% else %}
                 <p></p>
             {% endif %}
+        {{ task.data|naturaltime }}
 
-{#            {{ task.theme }}#}
 
 
         </div>
@@ -38,14 +42,14 @@
         {% endif %}
             {% for item in task.comments_task.all %}
                 <div class="alert alert-warning">
-                    Автор: {{ item.author }}<br><br>
+                    <img class="avatar avatar-32 bg-light rounded-circle text-white p-2" src="{{ item.author.profile.avatar }}">{{ item.author }}<br><br>
                     <div style="white-space: pre-line">{{ item.text }}<br></div>
                     <div class="math"></div>
                     {% if item.img %}
                         <img src="{{ item.img.url }}" width="100%" height="50%">
                     {% endif %}
                     <div class="modal-footer">
-                        {{ item.create_date }}
+                        {{ item.create_date|naturaltime }}
                         <br>
                     </div>
                 </div>

@@ -2,7 +2,7 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 from django.forms import ModelForm, TextInput, Textarea, FileInput, \
     PasswordInput, CharField, Select
-from .models import Task, Comments
+from .models import Task, Comments, Profile
 
 
 class TaskForm(ModelForm):
@@ -73,3 +73,9 @@ class CommentForm(ModelForm):
                 "rows": 4,
             })
         }
+
+
+class ProfileForm(ModelForm):
+   class Meta:
+       model = Profile
+       fields = ['avatar', 'bio']

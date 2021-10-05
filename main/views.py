@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, UpdateView, DeleteView, CreateView
 from django.views.generic.edit import FormMixin
@@ -44,6 +44,7 @@ class Detail(FormMixin, DetailView):
         self.object.save()
         return super().form_valid(form)
 
+
 class PostUpdate(UpdateView):
     model = Task
     template_name = "main/create.html"
@@ -62,24 +63,11 @@ def about(request):
     return render(request, 'main/about.html')
 
 
-def create(request):
-    error = ''
-    if request.method == "POST":
-
-        form = TaskForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect("home")
-        else:
-            error = "Форма была неверной"
-    form = TaskForm()
-    img_obj = form.instance
-    context = {
-        'form': form,
-        'error': error,
-        'img_obj': img_obj
-    }
-    return render(request, 'main/create.html', context)
+class CreateQuestion(CreateView):
+    form_class = TaskForm
+    template_name = "main/create.html"
+    success_url = reverse_lazy("home")
+    context_object_name = "form"
 
 
 class RegisterUser(CreateView):
