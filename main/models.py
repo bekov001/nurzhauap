@@ -40,9 +40,9 @@ def create_or_update_user_profile(sender, instance, created, **kwargs):
 
 
 class Task(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE,
-                               verbose_name="Автор вопросы", blank=True,
-                               null=True)
+    # user = models.ForeignKey(User, on_delete=models.CASCADE,
+                               # verbose_name="Автор вопросы", blank=True,
+                               # null=True)
     title = models.CharField('Название', max_length=50)
     task = models.TextField("Описание", max_length=1500)
     img = models.ImageField(upload_to=r"media", null=True, blank=True)
