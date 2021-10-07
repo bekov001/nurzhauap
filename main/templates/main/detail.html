@@ -42,7 +42,8 @@
         {% endif %}
             {% for item in task.comments_task.all %}
                 <div class="alert alert-warning">
-                    <img class="avatar avatar-32 bg-light rounded-circle text-white p-2" src="{{ item.author.profile.avatar }}">{{ item.author }}<br><br>
+                    <img class="avatar avatar-32 bg-light rounded-circle text-white p-2" src="{{ item.author.profile.avatar }}">
+                    <a>{{ item.author }}</a><br><br>
                     <div style="white-space: pre-line">{{ item.text }}<br></div>
                     <div class="math"></div>
                     {% if item.img %}
