@@ -6,6 +6,7 @@ from .forms import *
 from .models import Task
 from django.contrib.auth.decorators import login_required
 
+
 # Create your views here.
 def test(request):
     return render(request, "404/index.html")
