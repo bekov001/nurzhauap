@@ -7,9 +7,9 @@
         <div class="alert alert-primary mt-3" style="word-wrap: break-word;">
 {#            <div style="width:30%;" class="bg-info rounded-circle">#}
 {#                <img src="{{ user.profile.get_avatar }}">#}
-{#            <img class="avatar avatar-32 bg-light rounded-circle text-white p-2"#}
-{#     src="{{ task.user.profile.get_avatar }}">#}
-{#            <a>{{ task.user }}</a>#}
+            <img class="avatar avatar-32 bg-light rounded-circle text-white p-2"
+     src="{{ task.user.avatar }}">
+            <a>{{ task.user }}</a>
             <h1>{{ task.title }}</h1>
 
             <p style="white-space: pre-line">{{ task.task }}</p>
@@ -42,7 +42,7 @@
         {% endif %}
             {% for item in task.comments_task.all %}
                 <div class="alert alert-warning">
-                    <img class="avatar avatar-32 bg-light rounded-circle text-white p-2" src="{{ item.author.profile.avatar }}">
+                    <img class="avatar avatar-32 bg-light rounded-circle text-white p-2" src="{{ item.author.avatar }}">
                     <a>{{ item.author }}</a><br><br>
                     <div style="white-space: pre-line">{{ item.text }}<br></div>
                     <div class="math"></div>

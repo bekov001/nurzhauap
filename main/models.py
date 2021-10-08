@@ -1,7 +1,9 @@
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AbstractUser
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+
+from example import settings
 
 THEMES = (
     ('Программирование_programming', 'Программирование'),
@@ -12,37 +14,18 @@ THEMES = (
 )
 
 
-class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    bio = models.TextField(max_length=500, blank=True)
-    avatar = models.ImageField(upload_to=r"media/avatars", default=r"https://raw.githubusercontent.com/twbs/icons/main/icons/person-fill.svg",blank=True)
-
-    def get_avatar(self):
-        # variable PATH_TO_DEFAULT_STATIC_IMAGE depends on the enviroment
-        # on development, it would be something like "localhost:8000/static/default_avatar.png"
-        # on production, it would be something like "https://BUCKET_NAME.s3.amazonaws.com/static/default_avatar.png"
-        return self.avatar if self.avatar else "/media/avatars/ava.svg"
-
-
-@receiver(post_save, sender=User)
-def create_or_update_user_profile(sender, instance, created, **kwargs):
-    if created:
-        Profile.objects.create(user=instance)
-    instance.profile.save()
-# @receiver(post_save, sender=User)
-# def create_user_profile(sender, instance, created, **kwargs):
-#     if created:
-#         Profile.objects.create(user=instance)
-#
-# @receiver(post_save, sender=User)
-# def save_user_profile(sender, instance, **kwargs):
-#     instance.profile.save()
+class Profile(AbstractUser):
+    username = models.CharField("Имя пользователя", max_length=100, unique=True)
+    desc = models.CharField("Описание", max_length=1000,
+                            default="Дураки не любят гениальных, "
+                                    "ненавидь меня это нормально")
+    avatar = models.ImageField("Фото", upload_to="media",
+                               default="media/avatars/ava.svg")
+    password = models.CharField("Пароль", max_length=500)
 
 
 class Task(models.Model):
-    # user = models.ForeignKey(User, on_delete=models.CASCADE,
-                               # verbose_name="Автор вопросы", blank=True,
-                               # null=True)
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE, verbose_name="Автор вопроса", blank=True)
     title = models.CharField('Название', max_length=50)
     task = models.TextField("Описание", max_length=1500)
     img = models.ImageField(upload_to=r"media", null=True, blank=True)
@@ -63,7 +46,7 @@ class Task(models.Model):
 
 class Comments(models.Model):
     article = models.ForeignKey(Task, on_delete=models.CASCADE, verbose_name="Вопрос", blank=True, null=True, related_name="comments_task")
-    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Автор комментария", blank=True, null=True)
+    author = models.ForeignKey(Profile, on_delete=models.CASCADE, verbose_name="Автор комментария", blank=True, null=True)
     create_date = models.DateTimeField(auto_now=True)
     text = models.TextField(verbose_name="Текст", max_length=1500)
     img = models.ImageField(upload_to=r"media", null=True, blank=True)

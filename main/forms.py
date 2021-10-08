@@ -34,7 +34,7 @@ class RegisterForm(UserCreationForm):
         self.fields["password2"].help_text = ""
 
     class Meta:
-        model = User
+        model = Profile
         fields = ['username', "password1", "password2"]
         widgets = {
             "username": TextInput(attrs={
@@ -75,7 +75,14 @@ class CommentForm(ModelForm):
         }
 
 
-class ProfileForm(ModelForm):
-   class Meta:
-       model = Profile
-       fields = ['avatar', 'bio']
+class UpdateForm(ModelForm):
+    class Meta:
+        model = Profile
+        fields = ("avatar", 'desc')
+        widgets = {
+            "desc": Textarea(attrs={
+                'class': 'form-control',
+                'placeholder': 'Введите описание',
+                "rows": 4,
+            })
+        }

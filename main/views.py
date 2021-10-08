@@ -1,10 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, UpdateView, DeleteView, CreateView
 from django.views.generic.edit import FormMixin
-from .forms import TaskForm, RegisterForm, CommentForm
+from .forms import *
 from .models import Task
-
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def test(request):
@@ -63,11 +63,28 @@ def about(request):
     return render(request, 'main/about.html')
 
 
-class CreateQuestion(CreateView):
-    form_class = TaskForm
-    template_name = "main/create.html"
-    success_url = reverse_lazy("home")
-    context_object_name = "form"
+# class CreateQuestion(CreateView):
+#     form_class = TaskForm
+#     template_name = "main/create.html"
+#     success_url = reverse_lazy("home")
+#     context_object_name = "form"
+
+
+@login_required
+def profile(request):
+    if request.method == 'POST':
+        p_form = TaskForm(request.POST, request.FILES)
+        if p_form.is_valid():
+            p_form.instance.user = request.user
+            p_form.save()
+            return redirect('home')
+    else:
+        p_form = TaskForm()
+
+    context = {
+        'form': p_form
+    }
+    return render(request, "main/create.html", context)
 
 
 class RegisterUser(CreateView):
@@ -75,14 +92,10 @@ class RegisterUser(CreateView):
     template_name = "registration/register.html"
     success_url = reverse_lazy("login")
 
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     # c_def = self.get_user_context(title="Регистрация")
-    #     return dict(list(context.items))
-# def detail(request, id):
-#     task = Task.objects.all() .l
-#     post = e
-#         'id': id,
-#         'task': task
-#     }
-#     return render(request, 'main/detail.html', post)
+
+class UserProfile(DetailView):
+    model = Profile
+    form_class = UpdateForm
+    template_name = "registration/profile.html"
+    context_object_name = "profile"
+    # success_url = reverse_lazy("profile")
