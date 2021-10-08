@@ -20,7 +20,7 @@ class Profile(AbstractUser):
                             default="Дураки не любят гениальных, "
                                     "ненавидь меня это нормально")
     avatar = models.ImageField("Фото", upload_to="media",
-                               default="media/avatars/ava.svg")
+                               default="media/avatars/avatar.jpg")
     password = models.CharField("Пароль", max_length=500)
 
 
