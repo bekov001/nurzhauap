@@ -1,19 +1,26 @@
 {% extends 'main/base.html' %}
 {#{% load crispy_forms_tags %}#}
 {% block title %}{{ task.title }}{% endblock %}
-
+{% load humanize %}
 {% block content %}
     <div class="container">
         <div class="alert alert-primary mt-3" style="word-wrap: break-word;">
-
+{#            <div style="width:30%;" class="bg-info rounded-circle">#}
+{#                <img src="{{ user.profile.get_avatar }}">#}
+            <img class="avatar avatar-32 bg-light rounded-circle text-white p-2"
+     src="{{ task.user.avatar }}">
+            <a>{{ task.user }}</a>
             <h1>{{ task.title }}</h1>
 
-            <p>{{ task.task }}</p>
+            <p style="white-space: pre-line">{{ task.task }}</p>
             {% if task.img %}
                 <p><img src="{{ task.img.url}}" alt="{{ task.task }}" width="100%" height="50%"></p>
             {% else %}
                 <p></p>
             {% endif %}
+        {{ task.data|naturaltime }}
+
+
 
         </div>
         <p>Комментарии {{ task.comments_task.all.count }}</p>
@@ -24,7 +31,6 @@
                 {% csrf_token %}
                 {{ form.text }}<br>
                 {{ form.img}}<br>
-
             </form>
             <div class="modal-footer">
                 <button form="add_form" type="submit" class="btn btn-primary">Добавить</button>
@@ -36,14 +42,16 @@
         {% endif %}
             {% for item in task.comments_task.all %}
                 <div class="alert alert-warning">
-                    Автор: {{ item.author }}<br><br>
-                    {{ item.text }}<br>
-{#                    <div class=""></div>#}
+                    <img class="avatar avatar-32 bg-light rounded-circle text-white p-2" src="{{ item.author.avatar }}">
+                    <a>{{ item.author }}</a><br><br>
+                    <div style="white-space: pre-line">{{ item.text }}<br></div>
+                    <div class="math"></div>
                     {% if item.img %}
                         <img src="{{ item.img.url }}" width="100%" height="50%">
                     {% endif %}
                     <div class="modal-footer">
-                        Дата создания: {{ item.create_date }}<br>
+                        {{ item.create_date|naturaltime }}
+                        <br>
                     </div>
                 </div>
             {% endfor %}
