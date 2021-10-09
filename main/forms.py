@@ -35,7 +35,7 @@ class RegisterForm(UserCreationForm):
 
     class Meta:
         model = Profile
-        fields = ['username', "password1", "password2"]
+        fields = ['username', "password1", "password2", "avatar"]
         widgets = {
             "username": TextInput(attrs={
                 'class': 'form-control',

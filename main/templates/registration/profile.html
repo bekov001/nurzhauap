@@ -2,5 +2,26 @@
 {#{% load crispy_forms_tags %}#}
 {% block title %}{{ task.title }}{% endblock %}
 {% block content %}
-    {{ profile.username }}
+{#    {{ profile.username }}#}
+{#    {{ form.as_p }}#}
+    {% if user.username == profile.username %}
+        <form action="" id="add_form" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="container">
+                {{ profile.username }}<br>
+                <img src="/{{ profile.avatar }}"><br>
+                {{ form.avatar }}<br>
+                {{ form.desc }}<br>
+            </div>
+        </form>
+        <div class="modal-footer">
+            <button form="add_form" type="submit" class="btn btn-primary">Добавить</button>
+        </div>
+    {% else %}
+        <div class="container">
+            {{ profile.username }}<br>
+            <img src="/{{ profile.avatar }}"><br>
+            {{ profile.desc }}<br>
+        </div>
+    {% endif %}
 {% endblock %}

@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def test(request):
-    return render(request, "404/index.html")
+    return render(request, "ERROR/index.html")
 
 
 def index(request):
@@ -94,7 +94,7 @@ class RegisterUser(CreateView):
     success_url = reverse_lazy("login")
 
 
-class UserProfile(DetailView):
+class UserProfile(UpdateView):
     model = Profile
     form_class = UpdateForm
     template_name = "registration/profile.html"

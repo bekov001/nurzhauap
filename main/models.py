@@ -20,8 +20,11 @@ class Profile(AbstractUser):
                             default="Дураки не любят гениальных, "
                                     "ненавидь меня это нормально")
     avatar = models.ImageField("Фото", upload_to="media",
-                               default="media/avatars/avatar.jpg")
+                               default="/media/avatars/avatar.jpg")
     password = models.CharField("Пароль", max_length=500)
+
+    def get_absolute_url(self):
+        return f"/profile/{self.id}"
 
 
 class Task(models.Model):
