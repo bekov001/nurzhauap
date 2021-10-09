@@ -9,7 +9,7 @@ class TaskForm(ModelForm):
 
     class Meta:
         model = Task
-        fields = ['title', 'task', "img", "theme"]
+        fields = ['title', 'task', "img", "category"]
 
         widgets = {"title": TextInput(attrs={
             'class': 'form-control',
@@ -19,7 +19,7 @@ class TaskForm(ModelForm):
             'class': 'form-control',
             'placeholder': 'Введите описание',
 
-        }), "theme": Select(attrs={
+        }), "category": Select(attrs={
             "class": "form-select",
             # "max-width": "200"
         })

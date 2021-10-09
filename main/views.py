@@ -12,7 +12,17 @@ def test(request):
     return render(request, "ERROR/index.html")
 
 
+def show_category(request, cat_id):
+    tasks = Task.objects.order_by('-id').filter(category_id=cat_id)
+    data = {
+        "title": "Главная страница",
+        "tasks": tasks
+    }
+    return render(request, 'main/index.html', data)
+
+
 def index(request):
+
     tasks = Task.objects.order_by('-id')
     data = {
         "title": "Главная страница",

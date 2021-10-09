@@ -61,9 +61,8 @@
                                 <img class="avatar avatar-32 bg-light rounded-circle text-white " src="/{{ user.avatar }}" width="32x" height="32px">
                               </a>
                               <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                                <li><a class="dropdown-item" href="{% url 'logout' %}">Выйти</a></li>
-{#                                <li><a class="dropdown-item" href="#">Другое действие</a></li>#}
-{#                                <li><a class="dropdown-item" href="#">Что-то еще здесь</a></li>#}
+                                  <li><a class="dropdown-item" href="{{ user.get_absolute_url }}">Смотреть профиль</a></li>
+                                  <li><a class="dropdown-item" href="{% url 'logout' %}">Выйти</a></li>
                               </ul>
                             </li>
                           </ul>

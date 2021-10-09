@@ -141,3 +141,7 @@ db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
 django_heroku.settings(locals())
 AUTH_USER_MODEL = 'main.Profile'
+
+X_FRAME_OPTIONS = 'ALLOW-FROM nurzhauap.tk'
+CSRF_TRUSTED_ORIGINS = ['nurzhauap.tk']
+CSRF_COOKIE_SAMESITE = None

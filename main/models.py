@@ -20,21 +20,31 @@ class Profile(AbstractUser):
                             default="Дураки не любят гениальных, "
                                     "ненавидь меня это нормально")
     avatar = models.ImageField("Фото", upload_to="media",
-                               default="/media/avatars/avatar.jpg")
+                               default="media/avatars/avatar.jpg")
     password = models.CharField("Пароль", max_length=500)
 
     def get_absolute_url(self):
         return f"/profile/{self.id}"
 
 
+class Category(models.Model):
+    theme = models.CharField(max_length=28, choices=THEMES,
+                             default='math')
+
+    def __str__(self):
+        return self.theme
+
+    def get_absolute_url(self):
+        return f"/category/{self.id}"
+
+
 class Task(models.Model):
     user = models.ForeignKey(Profile, on_delete=models.CASCADE, verbose_name="Автор вопроса", blank=True)
+    category = models.ForeignKey(Category, on_delete=models.PROTECT, null=True)
     title = models.CharField('Название', max_length=50)
     task = models.TextField("Описание", max_length=1500)
     img = models.ImageField(upload_to=r"media", null=True, blank=True)
     data = models.DateTimeField(auto_now=True)
-    theme = models.CharField(max_length=28, choices=THEMES,
-                             default='math')
 
     def __str__(self):
         return self.title

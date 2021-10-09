@@ -29,5 +29,6 @@ urlpatterns = [
     path('post/<int:pk>/delete', views.DeletePost.as_view(), name='delete'),
     path('register', views.RegisterUser.as_view(), name='register'),
     path("profile/<int:pk>", views.UserProfile.as_view(), name="profile"),
-    path("404", views.test, name="test")
+    path("404", views.test, name="test"),
+    path("posts/<int:cat_id>", views.show_category, name="categories")
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

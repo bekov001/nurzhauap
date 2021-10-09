@@ -3,13 +3,38 @@
 {% block title %}{{ task.title }}{% endblock %}
 {% load humanize %}
 {% block content %}
+    <style>
+        #link {
+            position: relative;
+            color: #00a650; /*задаём цвет ссылки*/
+            cursor: pointer;
+            line-height: 1; /*задаём высоту строки*/
+            text-decoration: none; /*убираем подчёркивание*/
+
+        }
+        #link:after {
+            display: block;
+            position: absolute;
+            left: 0; /*изменить на right:0;, чтобы изменить направление подчёркивания */
+            width: 0;/*задаём длинну линии до наведения курсора*/
+            height: 2px; /*задаём ширину линии*/
+            background-color: #00a650; /*задаём цвет линии*/
+            content: "";
+            transition: width 0.3s ease-out; /*задаём время анимации*/
+        }
+
+        #link:hover:after,
+        #link:focus:after {
+            width: 100%; /*устанавливаем значение 100% чтобы ссылка подчёркивалась полностью*/
+        }
+    </style>
     <div class="container">
         <div class="alert alert-primary mt-3" style="word-wrap: break-word;">
 {#            <div style="width:30%;" class="bg-info rounded-circle">#}
 {#                <img src="{{ user.profile.get_avatar }}">#}
-            <img class="avatar avatar-32 bg-light rounded-circle text-white"
-     src="/{{ task.user.avatar }}" width="32px" height="32px">
-            <a>{{ task.user }}</a>
+            <a href="{{ task.user.get_absolute_url }}"><img class="avatar avatar-32 bg-light rounded-circle text-white"
+                    src="/{{ task.user.avatar }}" width="32px" height="32px"></a>
+            <a href="{{ task.user.get_absolute_url }}" id="link">{{ task.user }}</a>
             <h1>{{ task.title }}</h1>
 
             <p style="white-space: pre-line">{{ task.task }}</p>
@@ -18,7 +43,7 @@
             {% else %}
                 <p></p>
             {% endif %}
-        {{ task.data|naturaltime }}
+            <p class="text-end">{{ task.data|naturaltime }}</p>
 
 
 
@@ -43,13 +68,14 @@
             {% for item in task.comments_task.all %}
                 <div class="alert alert-warning">
                     <img class="avatar avatar-32 bg-light rounded-circle text-white" src="/{{ item.author.avatar }}" width="32px" height="32px">
-                    <a>{{ item.author }}</a><br><br>
+                    <a id="link" href="{{ item.author.get_absolute_url }}">{{ item.author }}</a><br><br>
                     <div style="white-space: pre-line">{{ item.text }}<br></div>
                     <div class="math"></div>
                     {% if item.img %}
                         <img src="{{ item.img.url }}" width="100%" height="50%">
                     {% endif %}
                     <div class="modal-footer">
+{#                        <p class="text-end">{{ item.create_date|naturaltime }}</p>#}
                         {{ item.create_date|naturaltime }}
                         <br>
                     </div>
