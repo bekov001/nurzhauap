@@ -40,7 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     "main",
-    'crispy_forms'
+    'crispy_forms',
+    'cloudinary_storage',
+    'django.contrib.staticfiles',
+    "cloudinary"
 ]
 
 
@@ -145,3 +148,10 @@ AUTH_USER_MODEL = 'main.Profile'
 X_FRAME_OPTIONS = 'ALLOW-FROM nurzhauap.tk'
 CSRF_TRUSTED_ORIGINS = ['nurzhauap.tk']
 CSRF_COOKIE_SAMESITE = None
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'YOUR_CLOUD_NAME',
+    'API_KEY': 'YOUR_API_KEY',
+    'API_SECRET': 'YOUR_API_SECRET',
+}
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
