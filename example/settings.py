@@ -150,8 +150,8 @@ CSRF_TRUSTED_ORIGINS = ['nurzhauap.tk']
 CSRF_COOKIE_SAMESITE = None
 
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'YOUR_CLOUD_NAME',
-    'API_KEY': 'YOUR_API_KEY',
-    'API_SECRET': 'YOUR_API_SECRET',
+    'CLOUD_NAME': "hcob5b5ol",
+    'API_KEY': "975369165676393",
+    'API_SECRET': "WM6cPmvqndX3gYXB9HVQeD_2jfU",
 }
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
