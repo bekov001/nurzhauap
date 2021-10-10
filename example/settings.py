@@ -14,6 +14,7 @@ from pathlib import Path
 import os
 import dj_database_url
 import django_heroku
+import cloudinary
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -37,12 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    "cloudinary_storage",
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     "main",
     'crispy_forms',
-    'cloudinary_storage',
-    'django.contrib.staticfiles',
     "cloudinary"
 ]
 
@@ -155,3 +155,9 @@ CLOUDINARY_STORAGE = {
     'API_SECRET': "WM6cPmvqndX3gYXB9HVQeD_2jfU",
 }
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+cloudinary.config(
+  cloud_name = "hcob5b5ol",
+  api_key = "975369165676393",
+  api_secret = "WM6cPmvqndX3gYXB9HVQeD_2jfU"
+)
