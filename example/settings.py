@@ -156,8 +156,8 @@ CLOUDINARY_STORAGE = {
 }
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
-cloudinary.config(
-  cloud_name = "hcob5b5ol",
-  api_key = "975369165676393",
-  api_secret = "WM6cPmvqndX3gYXB9HVQeD_2jfU"
-)
+# cloudinary.config(
+#   cloud_name = "hcob5b5ol",
+#   api_key = "975369165676393",
+#   api_secret = "WM6cPmvqndX3gYXB9HVQeD_2jfU"
+# )
