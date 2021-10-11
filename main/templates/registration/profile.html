@@ -9,7 +9,7 @@
             {% csrf_token %}
             <div class="container">
                 {{ profile.username }}<br>
-                <img class="img-thumbnail" src="/{{ profile.avatar }}"><br>
+                <img class="img-thumbnail" src="{{ profile.avatar.url }}"><br>
                 {{ form.avatar }}<br>
                 {{ form.desc }}<br>
             </div>
@@ -19,7 +19,7 @@
         </div>
     {% else %}
         <div class="container">
-            <img src="/{{ profile.avatar }}" class="img-thumbnail" style="max-width:250px;max-height:250px">
+            <img src="{{ profile.avatar.url }}" class="img-thumbnail" style="max-width:250px;max-height:250px">
             <p class="fs-3">{{ profile.username }}</p>
             <p class="fst-italic">{{ profile.desc }}</p>
         </div>
