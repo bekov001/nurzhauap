@@ -19,7 +19,7 @@ class Profile(AbstractUser):
     desc = models.CharField("Описание", max_length=1000,
                             default="Дураки не любят гениальных, "
                                     "ненавидь меня это нормально")
-    avatar = models.ImageField("Фото", upload_to="media",
+    avatar = models.ImageField("Фото", upload_to="media/avatars",
                                default="media/avatars/avatar.jpg")
     password = models.CharField("Пароль", max_length=500)
 

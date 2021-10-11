@@ -33,7 +33,7 @@
 {#            <div style="width:30%;" class="bg-info rounded-circle">#}
 {#                <img src="{{ user.profile.get_avatar }}">#}
             <a href="{{ task.user.get_absolute_url }}"><img class="avatar avatar-32 bg-light rounded-circle text-white"
-                    src="/{{ task.user.avatar }}" width="32px" height="32px"></a>
+                    src="{{ task.user.avatar.url }}" width="32px" height="32px"></a>
             <a href="{{ task.user.get_absolute_url }}" id="link">{{ task.user }}</a>
             <h1>{{ task.title }}</h1>
 
@@ -67,7 +67,7 @@
         {% endif %}
             {% for item in task.comments_task.all %}
                 <div class="alert alert-warning">
-                    <img class="avatar avatar-32 bg-light rounded-circle text-white" src="/{{ item.author.avatar }}" width="32px" height="32px">
+                    <img class="avatar avatar-32 bg-light rounded-circle text-white" src="{{ item.author.avatar.url }}" width="32px" height="32px">
                     <a id="link" href="{{ item.author.get_absolute_url }}">{{ item.author }}</a><br><br>
                     <div style="white-space: pre-line">{{ item.text }}<br></div>
                     <div class="math"></div>
