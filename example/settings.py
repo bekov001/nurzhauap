@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     "main",
     'crispy_forms',
-    "cloudinary"
+    "cloudinary",
+    "django.contrib.sitemaps"
 ]
 
 

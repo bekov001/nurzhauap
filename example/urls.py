@@ -16,10 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import path, include
-
+from django.views.generic import TemplateView
+from .views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('robots.txt', TemplateView.as_view(template_name='search/robots.txt', content_type='text/plain')),
+    path('sitemap.xml', SitemapXmlView.as_view()),
     path("", include("main.urls"))
 ]
 
