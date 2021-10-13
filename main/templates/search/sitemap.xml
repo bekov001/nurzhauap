@@ -27,14 +27,14 @@
     </url>
     {% for i in tasks %}
         <url>
-            <loc>{{ request.sheme }}://{{ request.get_host }}{{ i.get_absolute_url }}</loc>
+            <loc>http://{{ request.get_host }}{{ i.get_absolute_url }}</loc>
             <lastmod>{{ i.updated|date:"Y-m-d" }}</lastmod>
             <priority>0.80</priority>
         </url>
     {% endfor %}
     {% for i in profiles %}
         <url>
-            <loc>{{ request.sheme }}://{{ request.get_host }}{{ i.get_absolute_url }}</loc>
+            <loc>http://{{ request.get_host }}{{ i.get_absolute_url }}</loc>
             <lastmod>{{ i.updated|date:"Y-m-d" }}</lastmod>
             <priority>0.64</priority>
         </url>
