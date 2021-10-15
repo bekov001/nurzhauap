@@ -7,5 +7,5 @@ Disallow: /admin/
 User-agent: Yandex
 Disallow: /admin/
 
-Sitemap: www.nurzhauap.tk/sitemap.xml
+Sitemap: http://www.nurzhauap.tk/sitemap.xml
 Host: www.nurzhauap.tk
