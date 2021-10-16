@@ -4,7 +4,7 @@
     <loc>http://nurzhauap.tk/</loc>
     <changefreq>daily</changefreq>
   </url>
-    {% for i in tasks %}#}
+    {% for i in tasks %}
         <url>
             <loc>http://{{ request.get_host }}{{ i.get_absolute_url }}</loc>
             <lastmod>{{ i.data|date:"Y-m-d" }}</lastmod>
